@@ -8,6 +8,7 @@ public class GamecrateApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GamecrateApplication.class, args);
+		System.out.println("rodando!");
 	}
 
 }
