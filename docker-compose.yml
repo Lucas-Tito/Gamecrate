@@ -10,8 +10,9 @@ services:
       - SPRING_PROFILES_ACTIVE=dev
     depends_on:
       - db
-    volumes:
-      - ./backend:/app
+    # Remova o volume para o backend
+    # volumes:
+    #   - ./backend:/app
     networks:
       - app-network
 
