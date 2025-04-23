@@ -12,7 +12,7 @@ RUN npm install
 COPY . .
 
 # Expor a porta onde o Vue.js vai rodar (padrão 8081)
-EXPOSE 8081
+EXPOSE 5173
 
 # Comando para rodar o servidor de desenvolvimento do Vue.js
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
