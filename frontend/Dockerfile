@@ -1,18 +1,13 @@
-# Usar imagem oficial do Node.js
-FROM node:23-slim
-
-# Definir diretório de trabalho
+# Estágio de build
+FROM node:lts-alpine as build-stage
 WORKDIR /app
-
-# Copiar o package.json e instalar as dependências
 COPY package*.json ./
 RUN npm install
-
-# Copiar os arquivos restantes do projeto
 COPY . .
+RUN npm run build
 
-# Expor a porta onde o Vue.js vai rodar (padrão 8081)
+# Estágio de produção
+FROM nginx:stable-alpine as production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 EXPOSE 5173
-
-# Comando para rodar o servidor de desenvolvimento do Vue.js
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+CMD ["nginx", "-g", "daemon off;"]
